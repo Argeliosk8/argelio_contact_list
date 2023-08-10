@@ -17,6 +17,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
+
+			addContact: async (contact)=> {
+				let myBody = JSON.stringify(contact)
+				let options = {
+					method: "POST",
+					headers: {"Content-Type": "application/json"},
+					body: myBody,
+					redirect: 'follow'
+				}
+
+				const store = getStore()
+				setStore({
+					contacts: [...store.contacts, contact]
+				})
+
+				try {
+					const response = await fetch('https://playground.4geeks.com/apis/fake/contact/', options)
+					const data = await response.json()
+					console.log(data)
+					return data
+				} catch (error) {
+					console.log(error)
+				}
+			},
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
