@@ -5,6 +5,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			getContacts: async ()=> {
+				try {
+					const response = await fetch('https://playground.4geeks.com/apis/fake/contact/agenda/argelio')
+					const data = await response.json()
+					console.log(data)
+					setStore({
+						contacts: data
+					})
+				} catch (error) {
+					console.log(error)
+				}
+			},
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
