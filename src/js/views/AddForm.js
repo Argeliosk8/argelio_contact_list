@@ -1,14 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState} from "react";
 import React from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-export function Form(){
+export function AddForm(){
     const [name, setName] = useState()
     const [email, setEmail] = useState()
     const [phone, setPhone] = useState()
     const [address, setAddress] = useState()
     const {store, actions} = useContext(Context)
+
 
     const handleClick = (e)=>{
         e.preventDefault()

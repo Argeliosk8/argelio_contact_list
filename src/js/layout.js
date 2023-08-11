@@ -5,7 +5,8 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./views/home.js";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
-import { Form } from "./views/form.js";
+import { AddForm } from "./views/AddForm";
+import { EditForm } from "./views/EditForm";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -27,7 +28,8 @@ const Layout = () => {
 						<Route path="/demo" element={<Demo />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
-						<Route path="/form" element={<Form />}/>
+						<Route path="/form" element={<AddForm />}/>
+						<Route path="/edit/:id" element={<EditForm />}/>
 					</Routes>
 					<Footer />
 				</ScrollToTop>

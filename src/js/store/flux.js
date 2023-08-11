@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: []
+			contacts: [],
+			single: {}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -62,6 +63,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return data
 					
 
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			getContact: async (id)=>{
+				const options = {
+					method: 'GET',
+					redirect: 'follow'
+				}
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, options)
+					const data = await response.json()
+					setStore({
+						single: data
+						})
+					return data
 				} catch (error) {
 					console.log(error)
 				}

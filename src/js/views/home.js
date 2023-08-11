@@ -1,6 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { Link } from "react-router-dom";
 
 export function Home(){
 	const {store, actions} = useContext(Context)
@@ -27,6 +28,7 @@ export function Home(){
 					</div>
 					<div className="container col-3" id='buttonsContainer'>
 						<button onClick = {(e)=>{deleteClick(e, contact)}} class="btn btn-primary"><i class="bi bi-trash3-fill"></i>Delete</button>
+						<Link to={`/edit/${contact.id}`}><button class="btn btn-primary"><i class="bi bi-trash3-fill"></i>Edit</button></Link>
 					</div>
 				</div>
 		))}
