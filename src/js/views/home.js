@@ -4,6 +4,12 @@ import "../../styles/home.css";
 
 export function Home(){
 	const {store, actions} = useContext(Context)
+
+	const deleteClick = (e, contact)=>{
+		e.preventDefault()
+		actions.deleteContact(contact.id)
+		alert(`${contact.full_name} has been deleted from your agenda`)
+	}
 	useEffect(()=>{actions.getContacts()}, [])
 
 	return (
@@ -20,7 +26,7 @@ export function Home(){
 						<p>{contact.phone}</p>
 					</div>
 					<div className="container col-3" id='buttonsContainer'>
-						<h4>Buttons</h4>
+						<button onClick = {(e)=>{deleteClick(e, contact)}} class="btn btn-primary"><i class="bi bi-trash3-fill"></i>Delete</button>
 					</div>
 				</div>
 		))}

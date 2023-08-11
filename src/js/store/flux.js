@@ -41,6 +41,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
+
+			deleteContact: async (contact_id)	=>{
+				const store = getStore()
+				let options = {
+					method: "DELETE",
+					redirect: "follow"
+
+				}
+
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact_id}`, options)
+					const data = await response.json()
+					if(response.ok){
+						const newContacts = store.contacts.filter(contact => contact.id !== contact_id)
+						setStore({
+							contacts: newContacts
+						})
+					}
+					return data
+					
+
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
