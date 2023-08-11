@@ -4,55 +4,47 @@ import { Context } from "../store/appContext";
 import { Link, useParams } from "react-router-dom";
 
 export function EditForm(){
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [phone, setPhone] = useState()
-    const [address, setAddress] = useState()
+    
     const {store, actions} = useContext(Context)
     const params = useParams()
-    useEffect(()=>{actions.getContact(params.id)},[])
+    useEffect(()=>{actions.getContact(params.id)},[])    
 
     const handleClick = (e)=>{
         e.preventDefault()
         const contact = {
-            "full_name": name,
-            "email": email,
+            "full_name": document.getElementById('inputName').value,
+            "email": document.getElementById('InputEmail').value,
             "agenda_slug": 'argelio',
-            "address": address,
-            "phone": phone
+            "address": document.getElementById('inputAddress').value,
+            "phone": document.getElementById('inputPhone').value
         }
-
-        actions.addContact(contact)
-        alert('Your contact has been added')
-        document.getElementById('inputName').value = ''
-        document.getElementById('InputEmail').value = ''
-        document.getElementById('inputPhone').value = ''
-        document.getElementById('inputAddress').value = ''        
+        console.log(contact)
+        actions.updateContact(contact, params.id)
+        alert('Your contact has been updated')     
     }
-
+    
     return (
         <div className="container-fluid">
             <form>
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Full Name</label>
-                    <input onChange = {(e)=>{setName(e.target.value)}}type="text" class="form-control" id="inputName" aria-describedby="emailHelp" value={store.single.full_name}/>
+                    <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp"/>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input onChange = {(e)=>{setEmail(e.target.value)}} type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"/>
+                    <label for="InputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"/>
                 </div>
                 <div class="mb-3">
                     <label for="inputPhone" class="form-label">Phone</label>
-                    <input onChange = {(e)=>{setPhone(e.target.value)}} type="text" class="form-control" id="inputPhone"/>
+                    <input type="text" class="form-control" id="inputPhone" />
                 </div>
                 <div class="mb-3">
                     <label for="inputAddress" class="form-label">Address</label>
-                    <input onChange={(e)=>{setAddress(e.target.value)}} type="text" class="form-control" id="inputAddress"/>
+                    <input type="text" class="form-control" id="inputAddress"/>
                 </div>
                 <div className="container-fluid">
                      <button onClick = {(e)=>{handleClick(e)}} type="submit" class="btn btn-primary">Save</button>
                      <Link to='/'>Go back to your contacts</Link>
-                     <h3>{store.single}</h3>
                 </div>
            </form>
         </div>

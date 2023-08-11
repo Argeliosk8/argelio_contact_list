@@ -69,20 +69,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getContact: async (id)=>{
+				const contact_id = parseInt(id)
+				const store = getStore()
 				const options = {
 					method: 'GET',
 					redirect: 'follow'
 				}
 				try {
-					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, options)
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact_id}`, options)
 					const data = await response.json()
 					setStore({
-						single: data
+						single: data[0]
 						})
+					document.getElementById("inputName").value = store.single.full_name
+					document.getElementById("InputEmail").value = store.single.email
+					document.getElementById("inputPhone").value = store.single.phone
+					document.getElementById("inputAddress").value = store.single.address
 					return data
 				} catch (error) {
 					console.log(error)
 				}
+			},
+
+			updateContact: async (contact, id)=>{
+				//const store = getStore()
+				const myBody = JSON.stringify(contact)
+				const options = {
+					method: 'PUT',
+					headers: {"Content-Type": "application/json"},
+					body: myBody,
+					redirect: "follow"
+				}
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, options)
+					const data = await response.json()
+					return data	
+				} catch (error) {
+					console.log(error)
+				}
+
 			},
 
 			exampleFunction: () => {
